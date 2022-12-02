@@ -29,8 +29,8 @@
 	</head>
 	<body class="text-light bg-dark">
 		<div id="app">
-			<div class="container">
-				<div class="row my-5">
+			<div class="container pb-5">
+				<div class="row my-4">
 					<h1>Binary to Unicode</h1>
 				</div>
 				<form>
@@ -62,13 +62,16 @@
 							</div>
 						</div>
 					</div>
-					<div class="row my-2">
-						<div class="col-12 my-3 text-center unicode">
+					<div class="row mt-2 mb-5">
+						<div class="col-12 text-center unicode">
 							<p class="display-1">{{ unicode }}</p>
 						</div>
 						<div class="col-12 text-center">
 							<p class="h5"># {{ hexa }}</p>
 						</div>
+					</div>
+					<div class="d-flex justify-content-center mt-5">
+						<button type="button" class="btn btn-outline-light">Voir le code source</button>
 					</div>
 				</form>
 			</div>
