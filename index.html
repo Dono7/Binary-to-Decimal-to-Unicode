@@ -16,6 +16,16 @@
 			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 			crossorigin="anonymous"
 		/>
+
+		<style>
+			.unicode {
+				min-height: 200px;
+				padding: 12px 24px;
+			}
+			.unicode .display-1 {
+				font-size: 8rem;
+			}
+		</style>
 	</head>
 	<body class="text-light bg-dark">
 		<div id="app">
@@ -24,8 +34,8 @@
 					<h1>Binary to Unicode</h1>
 				</div>
 				<form>
-					<div class="row">
-						<div class="col-6">
+					<div class="row justify-content-center">
+						<div class="col-6 col-md-4">
 							<div class="mb-3">
 								<label for="binary" class="form-label">Binary</label>
 								<input
@@ -38,8 +48,7 @@
 								<div class="form-text">Ex: 11011101</div>
 							</div>
 						</div>
-
-						<div class="col-6">
+						<div class="col-6 col-md-4">
 							<div class="mb-3">
 								<label for="decimal" class="form-label">Decimal</label>
 								<input
@@ -52,12 +61,13 @@
 								<div class="form-text">Ex: 469</div>
 							</div>
 						</div>
-
-						<div class="col-12 my-3 text-center">
+					</div>
+					<div class="row my-2">
+						<div class="col-12 my-3 text-center unicode">
 							<p class="display-1">{{ unicode }}</p>
 						</div>
-						<div class="col-12 my-3 text-center">
-							<p class="h1">{{ hexa }}</p>
+						<div class="col-12 text-center">
+							<p class="h5"># {{ hexa }}</p>
 						</div>
 					</div>
 				</form>
@@ -91,10 +101,7 @@
 				},
 				computed: {
 					unicode() {
-						return this.binary
-							.split(" ")
-							.map((char) => String.fromCharCode(parseInt(char, 2)))
-							.join("")
+						return this.binary === "" ? " " : String.fromCharCode(parseInt(this.binary, 2))
 					},
 					hexa() {
 						return this.binary ? parseInt(this.binary, 2).toString(16).toUpperCase() : ""
