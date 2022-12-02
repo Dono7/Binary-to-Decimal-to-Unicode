@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Binary to Unicode</title>
+
+		<!-- Vue2 -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>Binary to Unicode</h1>
+			<input type="text" :value="binary" @input="onBinary" />
+			<input type="text" :value="decimal" @input="onDecimal" />
+			<p>{{ unicode }}</p>
+		</div>
+
+		<script>
+			new Vue({
+				el: "#app",
+				data: {
+					binary: "",
+					decimal: "",
+				},
+				computed: {
+					unicode() {
+						return this.binary
+							.split(" ")
+							.map((char) => String.fromCharCode(parseInt(char, 2)))
+							.join("")
+					},
+				},
+				methods: {
+					onBinary(e) {
+						this.binary = e.target.value
+						this.decimal = parseInt(this.binary, 2).toString()
+					},
+					onDecimal(e) {
+						this.decimal = e.target.value
+						this.binary = parseInt(this.decimal, 10).toString(2)
+					},
+				},
+			})
+		</script>
+	</body>
+</html>
