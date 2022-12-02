@@ -8,13 +8,45 @@
 
 		<!-- Vue2 -->
 		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+		<!-- Bootstrap 5 -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
 	</head>
-	<body>
+	<body class="text-light bg-dark">
 		<div id="app">
-			<h1>Binary to Unicode</h1>
-			<input type="text" :value="binary" @input="onBinary" />
-			<input type="text" :value="decimal" @input="onDecimal" />
-			<p>{{ unicode }}</p>
+			<div class="container">
+				<div class="row my-5">
+					<h1>Binary to Unicode</h1>
+				</div>
+				<form>
+					<div class="row">
+						<div class="col-6">
+							<div class="mb-3">
+								<label for="binary" class="form-label">Binary</label>
+								<input :value="binary" @input="onBinary" type="text" class="form-control" id="binary" />
+								<div class="form-text">Ex: 11011101</div>
+							</div>
+						</div>
+
+						<div class="col-6">
+							<div class="mb-3">
+								<label for="decimal" class="form-label">Decimal</label>
+								<input :value="decimal" @input="onDecimal" type="text" class="form-control" id="decimal" />
+								<div class="form-text">Ex: 469</div>
+							</div>
+						</div>
+
+						<div class="col-12 my-3 text-center">
+							<p class="display-2">{{ unicode }}</p>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 
 		<script>
@@ -35,11 +67,11 @@
 				methods: {
 					onBinary(e) {
 						this.binary = e.target.value
-						this.decimal = parseInt(this.binary, 2).toString()
+						this.decimal = this.binary === "" ? "" : parseInt(this.binary, 2).toString()
 					},
 					onDecimal(e) {
 						this.decimal = e.target.value
-						this.binary = parseInt(this.decimal, 10).toString(2)
+						this.binary = this.decimal === "" ? "" : parseInt(this.decimal, 10).toString(2)
 					},
 				},
 			})
