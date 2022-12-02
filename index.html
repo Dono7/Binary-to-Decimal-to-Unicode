@@ -28,7 +28,13 @@
 						<div class="col-6">
 							<div class="mb-3">
 								<label for="binary" class="form-label">Binary</label>
-								<input :value="binary" @input="onBinary" type="text" class="form-control" id="binary" />
+								<input
+									:value="binary"
+									@input="onBinary"
+									type="text"
+									class="form-control text-light bg-dark"
+									id="binary"
+								/>
 								<div class="form-text">Ex: 11011101</div>
 							</div>
 						</div>
@@ -36,13 +42,22 @@
 						<div class="col-6">
 							<div class="mb-3">
 								<label for="decimal" class="form-label">Decimal</label>
-								<input :value="decimal" @input="onDecimal" type="text" class="form-control" id="decimal" />
+								<input
+									:value="decimal"
+									@input="onDecimal"
+									type="text"
+									class="form-control text-light bg-dark"
+									id="decimal"
+								/>
 								<div class="form-text">Ex: 469</div>
 							</div>
 						</div>
 
 						<div class="col-12 my-3 text-center">
-							<p class="display-2">{{ unicode }}</p>
+							<p class="display-1">{{ unicode }}</p>
+						</div>
+						<div class="col-12 my-3 text-center">
+							<p class="h1">{{ hexa }}</p>
 						</div>
 					</div>
 				</form>
@@ -56,6 +71,24 @@
 					binary: "",
 					decimal: "",
 				},
+				methods: {
+					onBinary(e) {
+						this.binary = this.onlyBinary(e.target.value)
+						e.target.value = this.binary
+						this.decimal = this.binary === "" ? "" : parseInt(this.binary, 2).toString()
+					},
+					onDecimal(e) {
+						this.decimal = this.onlyNumbers(e.target.value)
+						e.target.value = this.decimal
+						this.binary = this.decimal === "" ? "" : parseInt(this.decimal, 10).toString(2)
+					},
+					onlyNumbers(numOrString) {
+						return numOrString.match(/[0-9]+/g)?.join("") ?? ""
+					},
+					onlyBinary(numOrString) {
+						return numOrString.match(/[0-1]+/g)?.join("") ?? ""
+					},
+				},
 				computed: {
 					unicode() {
 						return this.binary
@@ -63,15 +96,8 @@
 							.map((char) => String.fromCharCode(parseInt(char, 2)))
 							.join("")
 					},
-				},
-				methods: {
-					onBinary(e) {
-						this.binary = e.target.value
-						this.decimal = this.binary === "" ? "" : parseInt(this.binary, 2).toString()
-					},
-					onDecimal(e) {
-						this.decimal = e.target.value
-						this.binary = this.decimal === "" ? "" : parseInt(this.decimal, 10).toString(2)
+					hexa() {
+						return this.binary ? parseInt(this.binary, 2).toString(16).toUpperCase() : ""
 					},
 				},
 			})
